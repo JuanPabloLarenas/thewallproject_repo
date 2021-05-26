@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="register">
+        {% if messages %}
+        <ul>    
+            {% for message in messages %}    
+                <li>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <h1>Register</h1>
+        <form action="/register" method="post">
+            {% csrf_token %}
+            <div>First Name: <input type="text" name="fname"></div>
+            <div>Last Name: <input type="text" name="lname"></div>
+            <div>Email: <input type="email" name="email"></div>
+            <div>Password: <input type="password" name="password"></div>
+            <div>Confirm Password: <input type="password" name="cpassword"></div>
+            <input type="submit" value="Register" name="registerb">
+        </form>
+    </div>
+    <div id="login">
+        <h1>Login</h1>
+        <form action="/login" method="post">
+            {% csrf_token %}
+            <div>Email: <input type="email" name="email"></div>
+            <div>Password: <input type="password" name="password"></div>
+            <input type="submit" value="Login" name="loginb">
+        </form>
+    </div>
+</body>
+</html>

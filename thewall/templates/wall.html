@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #message{
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>CodingDojo Wall</h1>
+        <p>Welcome, {{currentuser}}</p>
+        <a href="/logout">Log Out</a>
+    </div>
+    <div>
+        <h2>Post a message</h2>
+        <form action="/messages" method="post">
+            {% csrf_token %}
+            <input type="text" name="message">
+            <input type="submit" value="Post a Message" name="messageb">
+        </form>
+        {% for i in messages %}
+            <div>{{i.user.first_name}} {{i.user.last_name}}: {{i.message}}</div>
+            {% for j in i.comments.all %}
+                <div id="message">{{j.user.first_name}} {{j.user.last_name}}: {{j.comment}}</div>
+            {% endfor %}
+            <form action="/comments/{{i.id}}" method="post">
+                {% csrf_token %}
+                <input type="text" name="comment">
+                <input type="submit" value="Post a Comment" name="commentb">
+            </form>
+        {% endfor %}
+    </div>
+</body>
+</html>
